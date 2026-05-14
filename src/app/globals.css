@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+/* Smooth scroll for anchor navigation between sections */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling — uses CSS var so it adapts per-template themeColor */
+::selection {
+  background-color: rgba(190, 24, 93, 0.2);
+  color: rgb(76, 5, 25);
+}
+
+/* ========================================================================
+   ANIMATIONS — used by premium hero/about/gallery/testimonials components
+   All respect prefers-reduced-motion (set to no-op when user opts out).
+   ======================================================================== */
+
+@keyframes ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scroll-down-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ========================================================================
+   UTILITY CLASSES — combine animations + delays
+   ======================================================================== */
+
+.animate-ken-burns {
+  animation: ken-burns 22s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; /* start hidden until animation runs */
+}
+.animate-fade-in-up.delay-100 { animation-delay: 0.1s; }
+.animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+.animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
+.animate-fade-in-up.delay-400 { animation-delay: 0.4s; }
+.animate-fade-in-up.delay-500 { animation-delay: 0.5s; }
+.animate-fade-in-up.delay-700 { animation-delay: 0.7s; }
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-scroll-bob {
+  animation: scroll-down-bob 1.8s ease-in-out infinite;
+}
+
+.whatsapp-pulse {
+  animation: whatsapp-pulse 2s infinite;
+}
+
+/* Skeleton loading shimmer for image placeholders */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(190, 24, 93, 0.04) 0%,
+    rgba(190, 24, 93, 0.08) 50%,
+    rgba(190, 24, 93, 0.04) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ========================================================================
+   CARD HOVER LIFT — used on gallery + service cards
+   ======================================================================== */
+
+.card-lift {
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease-out;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.18);
+}
+
+/* Image zoom on hover for gallery thumbnails */
+.zoom-on-hover {
+  overflow: hidden;
+}
+.zoom-on-hover img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.zoom-on-hover:hover img {
+  transform: scale(1.06);
+}
+
+/* ========================================================================
+   ACCESSIBILITY — honor prefers-reduced-motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================================
+   SCROLLBAR — subtle, brand-tinted
+   ======================================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(254, 242, 242);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(190, 24, 93, 0.3);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(190, 24, 93, 0.5);
+}
